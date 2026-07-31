@@ -59,6 +59,11 @@ the Windows system DLLs (`kernel32`, `user32`, `gdi32`, `winmm`).
 | ![Automap](screenshots/06-automap.png) | ![Melt](screenshots/07-melt.png) |
 | Automap of level 2 | The screen "melt" between levels |
 
+![Pistol](screenshots/09-pistol.png)
+
+*The pistol sprite at 7x zoom: a gloved fist gripping the grip, four curled
+fingers, the trigger guard showing above the hand.*
+
 ![Face](screenshots/08-faces.png)
 
 *The status bar portrait: the pupils track left / centre / right, and blood
