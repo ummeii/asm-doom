@@ -262,6 +262,14 @@ level2:
     MV 0,    1536        ; 23
     MV 768,  1536        ; 24
     MV 768,  1024        ; 25
+    MV 1700, 512        ; 26
+    MV 1900, 512        ; 27
+    MV 1700, 768        ; 28
+    MV 1900, 768        ; 29
+    MV 1700, 1024       ; 30
+    MV 1900, 1024       ; 31
+    MV 1700, 832        ; 32
+    MV 1900, 832        ; 33
 
 ; --- сектор 0: стартовый зал ---
     MSEC 0, 128, FLAT_FLOOR, FLAT_CEIL, 176, 0, 0
@@ -292,7 +300,9 @@ level2:
     MWS 10, 9, TEX_GSTONE
     MWP 9, 8, TEX_GSTONE, TEX_SUPPORT, 0
     MWS 8, 11, TEX_GSTONE
-    MWS 11, 12, TEX_GSTONE
+    MWS 11, 26, TEX_GSTONE
+    MWP 26, 27, TEX_GSTONE, TEX_SUPPORT, 0  ; подъём на галерею
+    MWS 27, 12, TEX_GSTONE
     MWS 12, 13, TEX_GSTONE
     ; синяя дверь: спец 26 = DR, нужен синий ключ
     MW 13, 14, TEX_DOORBLU, 0, TEX_STEP, 0, 0, 0, 26, 0
@@ -328,8 +338,34 @@ level2:
     MW 24, 25, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
     MWS 25, 22, TEX_MARBLE
 
+; --- сектор 8: галерея над залом ---
+    MSEC 88, 320, FLAT_STEP, FLAT_SKY, 240, 0, 0
+    MWS 26, 28, TEX_METAL
+    ; тайник: дверь под текстуру стены
+    MW 28, 29, TEX_METAL, 0, TEX_STEP, 0, 0, 0, 1, 0
+    MWS 29, 27, TEX_METAL
+    MWP 27, 26, TEX_GSTONE, TEX_SUPPORT, 0
+
+; --- сектор 9: створка тайника ---
+    MSEC 88, 88, FLAT_STEP, FLAT_CEIL, 160, 0, 0
+    MWS 28, 32, TEX_DOORTRAK
+    MWP 32, 33, TEX_METAL, TEX_STEP, 0
+    MWS 33, 29, TEX_DOORTRAK
+    MWP 29, 28, TEX_METAL, TEX_STEP, 0
+
+; --- сектор 10: тайник (спец 9) ---
+    MSEC 88, 216, FLAT_LIGHT, FLAT_LIGHT, 224, 9, 0
+    MWS 32, 30, TEX_COMP
+    MWS 30, 31, TEX_COMP
+    MWS 31, 33, TEX_COMP
+    MWP 33, 32, TEX_METAL, TEX_STEP, 0
+
 ; --- объекты ---
     MTH 320,  256, 0,   1,    7     ; старт игрока
+    MTH 1800, 640, 180, 3005, 7     ; какодемон на галерее
+    MTH 1800, 940, 0,   2004, 7     ; плазмаган в тайнике
+    MTH 1750, 900, 0,   2019, 7     ; тяжёлая броня
+    MTH 1850, 900, 0,   2047, 7     ; батареи
     MTH 896,  256, 0,   2007, 7     ; обойма в коридоре
     MTH 1520,  256, 0,   2001, 7     ; дробовик сразу за лифтом
     MTH 1700,  420, 180, 3004, 7     ; зомби
@@ -380,6 +416,14 @@ level3:
     MV 896, 512         ; 20
     MV 576, 320         ; 21
     MV 576, 512         ; 22
+    MV 650, 512         ; 23
+    MV 820, 512         ; 24
+    MV 650, 768         ; 25
+    MV 820, 768         ; 26
+    MV 400, 768         ; 27
+    MV 400, 1300        ; 28
+    MV 1100, 1300       ; 29
+    MV 1100, 768        ; 30
 
 ; --- сектор 0: стартовый зал ---
     MSEC 0, 128, FLAT_FLOOR, FLAT_CEIL, 176, 0, 0
@@ -403,7 +447,9 @@ level3:
 ; --- сектор 2: ниша с прессом (тег 2), пол разъедает ---
     MSEC 0, 128, FLAT_NUKAGE1, FLAT_CEIL, 128, 7, 2
     MWS 21, 22, TEX_BLOODWALL
-    MWS 22, 20, TEX_BLOODWALL
+    MWS 22, 23, TEX_BLOODWALL
+    MWP 23, 24, TEX_BLOODWALL, TEX_STEP, 0      ; проход в верхний зал
+    MWS 24, 20, TEX_BLOODWALL
     MWS 20, 6, TEX_BLOODWALL
     MWP 6, 21, TEX_METAL, TEX_STEP, 0
 
@@ -441,8 +487,29 @@ level3:
     MW 18, 19, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
     MWS 19, 16, TEX_MARBLE
 
+; --- сектор 8: проход из ниши ---
+    MSEC 0, 192, FLAT_STEP, FLAT_CEIL, 144, 0, 0
+    MWS 23, 25, TEX_SUPPORT
+    MWP 25, 26, TEX_SUPPORT, TEX_STEP, 0
+    MWS 26, 24, TEX_SUPPORT
+    MWP 24, 23, TEX_BLOODWALL, TEX_STEP, 0
+
+; --- сектор 9: верхний зал под небом ---
+    MSEC 24, 320, FLAT_ROCK, FLAT_SKY, 255, 0, 0
+    MWS 27, 28, TEX_GSTONE
+    MWS 28, 29, TEX_GSTONE
+    MWS 29, 30, TEX_GSTONE
+    MWS 30, 26, TEX_GSTONE
+    MWP 26, 25, TEX_SUPPORT, TEX_STEP, 0
+    MWS 25, 27, TEX_GSTONE
+
 ; --- объекты ---
     MTH 256, 256, 0,   1,    7      ; старт игрока
+    MTH 735, 640, 0,   2035, 7      ; бочка в проходе
+    MTH 600, 1100, 180, 3005, 7     ; какодемон в верхнем зале
+    MTH 900, 1100, 180, 3003, MTF_HARD ; барон на «ультре»
+    MTH 750, 1250, 0,   2049, 7     ; ящик патронов
+    MTH 500, 900,  0,   2013, 7     ; сфера души
     MTH 700, 400, 270, 3004, 7      ; зомби под прессом
     MTH 700, 440, 0,   2018, 7      ; броня в нише
     MTH 400, 256, 0,   2001, 7      ; дробовик у старта
