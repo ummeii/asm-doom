@@ -161,7 +161,7 @@ R_ApplyArt:
     sub     edx, eax
     mov     r8d, [r12 + AL_FLIP]
     call    R_ArtBlit
-    mov     ecx, -104
+    mov     ecx, -100
     mov     edx, -38
     call    SPR_Bake
     jmp     .store
@@ -179,7 +179,7 @@ R_ApplyArt:
     sub     edx, r14d
     mov     r8d, [r12 + AL_FLIP]
     call    R_ArtBlit
-    mov     ecx, -104
+    mov     ecx, -100
     mov     edx, -38                    ; низ спрайта у строки состояния
     call    SPR_Bake
 .store:

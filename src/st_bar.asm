@@ -280,7 +280,7 @@ ST_Bevel:
     mov     r13d, edx
     mov     r14d, r8d
     mov     r15d, r9d
-    mov     dword [sp_color], PAL_GRAY+28
+    mov     dword [sp_color], PAL_GRAY+22
     mov     ecx, r12d
     mov     edx, r13d
     mov     r8d, r14d
@@ -291,7 +291,7 @@ ST_Bevel:
     mov     r8d, r12d
     mov     r9d, r15d
     call    ST_FillRect
-    mov     dword [sp_color], PAL_GRAY+12
+    mov     dword [sp_color], PAL_GRAY+1
     mov     ecx, r12d
     mov     edx, r15d
     mov     r8d, r14d
@@ -321,7 +321,7 @@ ST_DrawBack:
 .row:
     mov     eax, ebx
     shr     eax, 3
-    add     eax, PAL_GRAY+19
+    add     eax, PAL_GRAY+7
     mov     [sp_color], eax
     mov     ecx, 0
     lea     edx, [ebx + STY]
@@ -331,13 +331,13 @@ ST_DrawBack:
     inc     ebx
     cmp     ebx, 32
     jb      .row
-    mov     dword [sp_color], PAL_GRAY+10
+    mov     dword [sp_color], PAL_GRAY+2
     mov     ecx, 0
     mov     edx, STY
     mov     r8d, SCREENWIDTH-1
     mov     r9d, STY
     call    ST_FillRect
-    mov     dword [sp_color], PAL_GRAY+28
+    mov     dword [sp_color], PAL_GRAY+18
     mov     ecx, 0
     mov     edx, STY+1
     mov     r8d, SCREENWIDTH-1
@@ -345,13 +345,13 @@ ST_DrawBack:
     call    ST_FillRect
     mov     ebx, 6
 .rivet:
-    mov     dword [sp_color], PAL_GRAY+8
+    mov     dword [sp_color], PAL_GRAY+2
     mov     ecx, ebx
     mov     edx, STY+3
     lea     r8d, [ebx + 1]
     mov     r9d, STY+4
     call    ST_FillRect
-    mov     dword [sp_color], PAL_GRAY+26
+    mov     dword [sp_color], PAL_GRAY+20
     lea     ecx, [ebx + 1]
     mov     edx, STY+4
     lea     r8d, [ebx + 2]
@@ -577,7 +577,7 @@ ST_Drawer:
     mov     edx, eax
     mov     r8d, ebx
     add     r8d, '2'
-    mov     r9d, PAL_GRAY+24            ; нет оружия -- тускло
+    mov     r9d, PAL_GRAY+18            ; нет оружия -- тускло
     cmp     dword [player + PL_WEAPONOWNED + rbx*4 + 4], 0
     je      .armdraw
     mov     r9d, PAL_YELLOW+2
@@ -622,7 +622,7 @@ ST_Drawer:
     imul    eax, 7
     add     eax, STY+4
     mov     r8d, eax
-    mov     edx, 288
+    mov     edx, 302
     mov     r9d, PAL_YELLOW+2
     push    rbx
     call    ST_DrawNum
@@ -632,14 +632,53 @@ ST_Drawer:
     imul    eax, 7
     add     eax, STY+4
     mov     r8d, eax
-    mov     edx, 316
-    mov     r9d, PAL_GRAY+6
+    mov     edx, 319
+    mov     r9d, PAL_GRAY+20
     push    rbx
     call    ST_DrawNum
     pop     rbx
     inc     ebx
     cmp     ebx, 4
     jb      .ammot
+
+    ; --- подписи полей ---
+    mov     rcx, str_lammo
+    mov     edx, 15
+    mov     r8d, STY+24
+    mov     r9d, PAL_GRAY+24
+    call    ST_DrawString
+    mov     rcx, str_lhealth
+    mov     edx, 62
+    mov     r8d, STY+24
+    mov     r9d, PAL_GRAY+24
+    call    ST_DrawString
+    mov     rcx, str_larms
+    mov     edx, 113
+    mov     r8d, STY+24
+    mov     r9d, PAL_GRAY+24
+    call    ST_DrawString
+    mov     rcx, str_larmor
+    mov     edx, 188
+    mov     r8d, STY+24
+    mov     r9d, PAL_GRAY+24
+    call    ST_DrawString
+    ; подписи таблицы боезапаса
+    xor     ebx, ebx
+.alab:
+    lea     rax, [st_ammolabels]
+    mov     rcx, [rax + rbx*8]
+    mov     edx, 257
+    mov     eax, ebx
+    imul    eax, 7
+    add     eax, STY+4
+    mov     r8d, eax
+    mov     r9d, PAL_RED+4
+    push    rbx
+    call    ST_DrawString
+    pop     rbx
+    inc     ebx
+    cmp     ebx, 4
+    jb      .alab
 
     ; --- сообщение ---
     mov     rcx, [player + PL_MESSAGE]
