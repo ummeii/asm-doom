@@ -58,6 +58,8 @@ the Windows system DLLs (`kernel32`, `user32`, `gdi32`, `winmm`).
 | A zombie up close, and the status bar | Level 3: the ledge reached by the stairs you built |
 | ![Automap](screenshots/06-automap.png) | ![Melt](screenshots/07-melt.png) |
 | Automap of level 2 | The screen "melt" between levels |
+| ![Intermission](screenshots/10-intermission.png) | ![Zombie](screenshots/11-zombie.png) |
+| The intermission tally between levels | A zombie sprite at 5x zoom |
 
 ![Pistol](screenshots/09-pistol.png)
 
@@ -145,6 +147,7 @@ src/f_wipe.asm      the screen melt between levels
 src/am_map.asm      automap
 src/m_menu.asm      skill selection menu
 src/st_bar.asm      status bar and the face
+src/wi_stuff.asm    the intermission tally between levels
 src/s_sound.asm     mixer on top of waveOut
 src/info.asm        object state and property tables
 src/art*.inc        pixel art: monsters, weapons, items, effects, HUD
@@ -205,8 +208,9 @@ stereo pan comes from the angle to the source.
 
 ## Levels
 
-1. Starting hall, a corridor with a manual door, a large hall under the sky
-   with the exit switch.
+1. Starting hall, a corridor with a manual door, a large hall under the sky,
+   then a courtyard split by a nukage channel that eats away at you, with the
+   exit switch on a ledge beyond it.
 2. A lift, a blue keycard, a locked door, a teleport. The exit hall is
    geometrically disconnected from the rest of the map — the teleport is the
    only way in.
@@ -219,8 +223,9 @@ stereo pan comes from the angle to the source.
 An honest list as of now:
 
 - Monster death sequences are five frames; the crumple could use more weight.
+- The renderer draws sprites and geometry from ellipse primitives with
+  depth-based shading, which reads as volume but lacks hand-placed detail.
 - The caco and lost soul still reuse other bodies for their death frames.
-- No intermission screen between levels.
 - Masked mid-textures on two-sided lines are not rendered.
 - No music.
 - No multiplayer, and none planned.
