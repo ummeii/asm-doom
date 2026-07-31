@@ -54,6 +54,7 @@
 %include "src/art_weap.inc"
 %include "src/art_mon.inc"
 %include "src/art_fx.inc"
+%include "src/art_death.inc"
 %include "src/art_items.inc"
 %include "src/art.inc"
 %include "src/levels.inc"

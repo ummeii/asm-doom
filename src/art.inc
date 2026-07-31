@@ -154,7 +154,11 @@ artlist:
     ARTE art_poss_sb, SPR_POSS, FMB,   RSX, 1, 0, 0
     ARTE art_poss_ba, SPR_POSS, FMALL, RB,  0, 0, 0
     ARTE art_poss_ba, SPR_POSS, FMALL, RBX, 1, 0, 0
-    ARTE art_corpse,  SPR_POSS, FMD,   0xFF, 0, 0, 0
+    ARTE art_dead_p0, SPR_POSS, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_p1, SPR_POSS, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_p2, SPR_POSS, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_p3, SPR_POSS, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_p4, SPR_POSS, 0x1000, 0xFF, 0, 0, 0
 
     ; --------------------- сержант: та же фигура, синяя ------------------
     ARTE art_poss_fa, SPR_SPOS, FMA,   RF,  0, 0, pal_spos
@@ -167,7 +171,11 @@ artlist:
     ARTE art_poss_sb, SPR_SPOS, FMB,   RSX, 1, 0, pal_spos
     ARTE art_poss_ba, SPR_SPOS, FMALL, RB,  0, 0, pal_spos
     ARTE art_poss_ba, SPR_SPOS, FMALL, RBX, 1, 0, pal_spos
-    ARTE art_corpse,  SPR_SPOS, FMD,   0xFF, 0, 0, 0
+    ARTE art_dead_p0, SPR_SPOS, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_p1, SPR_SPOS, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_p2, SPR_SPOS, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_p3, SPR_SPOS, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_p4, SPR_SPOS, 0x1000, 0xFF, 0, 0, 0
 
     ; ------------------------------ имп ---------------------------------
     ARTE art_troo_fa, SPR_TROO, FMA,   RF,  0, 0, 0
@@ -178,7 +186,11 @@ artlist:
     ARTE art_troo_sa, SPR_TROO, FMALL, RSX, 1, 0, 0
     ARTE art_troo_ba, SPR_TROO, FMALL, RB,  0, 0, 0
     ARTE art_troo_ba, SPR_TROO, FMALL, RBX, 1, 0, 0
-    ARTE art_corpse,  SPR_TROO, FMD,   0xFF, 0, 0, 0
+    ARTE art_dead_t0, SPR_TROO, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_t1, SPR_TROO, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_t2, SPR_TROO, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_t3, SPR_TROO, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_t4, SPR_TROO, 0x1000, 0xFF, 0, 0, 0
 
     ; ------------------------------ демон -------------------------------
     ARTE art_sarg_fa, SPR_SARG, FMA,   RF,  0, 0, 0
@@ -189,11 +201,19 @@ artlist:
     ARTE art_sarg_sa, SPR_SARG, FMALL, RSX, 1, 0, 0
     ARTE art_sarg_fa, SPR_SARG, FMALL, RB,  0, 0, 0
     ARTE art_sarg_fa, SPR_SARG, FMALL, RBX, 1, 0, 0
-    ARTE art_corpse,  SPR_SARG, FMD,   0xFF, 0, 0, 0
+    ARTE art_dead_s0, SPR_SARG, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_s1, SPR_SARG, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_s2, SPR_SARG, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_s3, SPR_SARG, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_s4, SPR_SARG, 0x1000, 0xFF, 0, 0, 0
 
     ; --------------------------- какодемон ------------------------------
     ARTE art_head_fa, SPR_HEAD, FMALL, 0xFF, 0, 0, 0
-    ARTE art_corpse,  SPR_HEAD, FMD,   0xFF, 0, 0, 0
+    ARTE art_dead_s0, SPR_HEAD, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_s1, SPR_HEAD, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_s2, SPR_HEAD, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_s3, SPR_HEAD, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_s4, SPR_HEAD, 0x1000, 0xFF, 0, 0, 0
 
     ; ------------------------------ барон -------------------------------
     ARTE art_boss_fa, SPR_BOSS, FMA,   RF,  0, 0, 0
@@ -204,7 +224,11 @@ artlist:
     ARTE art_boss_sa, SPR_BOSS, FMALL, RSX, 1, 0, 0
     ARTE art_boss_fa, SPR_BOSS, FMALL, RB,  0, 0, 0
     ARTE art_boss_fa, SPR_BOSS, FMALL, RBX, 1, 0, 0
-    ARTE art_corpse,  SPR_BOSS, FMD,   0xFF, 0, 0, 0
+    ARTE art_dead_s0, SPR_BOSS, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_s1, SPR_BOSS, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_s2, SPR_BOSS, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_s3, SPR_BOSS, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_s4, SPR_BOSS, 0x1000, 0xFF, 0, 0, 0
 
     ; ----------------------- потерянная душа ----------------------------
     ARTE art_skul_fa, SPR_SKUL, 0xFFFF, 0xFF, 0, 0, 0
@@ -216,7 +240,11 @@ artlist:
     ARTE art_poss_sa, SPR_PLAY, FMALL, RSX, 1, 0, 0
     ARTE art_poss_ba, SPR_PLAY, FMALL, RB,  0, 0, 0
     ARTE art_poss_ba, SPR_PLAY, FMALL, RBX, 1, 0, 0
-    ARTE art_corpse,  SPR_PLAY, FMD,   0xFF, 0, 0, 0
+    ARTE art_dead_p0, SPR_PLAY, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_p1, SPR_PLAY, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_p2, SPR_PLAY, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_p3, SPR_PLAY, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_p4, SPR_PLAY, 0x1000, 0xFF, 0, 0, 0
 
     ; ----------------------------- предметы -----------------------------
     ARTE art_armor,      SPR_ARM1, 0xFFFF, 0xFF, 0, 0, 0
@@ -284,5 +312,10 @@ artlist:
     ARTE art_tfog_c,  SPR_TFOG, 0x03E0, 0xFF, 0, 0, 0
 
     ARTE art_flash,   SPR_FLSH, 0xFFFF, 0xFF, 0, 2, 0
+
+    ; ------------------------ кадры выстрела ----------------------------
+    ARTE art_atk_p,   SPR_POSS, 0x0030, 0xFF, 0, 0, 0
+    ARTE art_atk_p,   SPR_SPOS, 0x0030, 0xFF, 0, 0, pal_spos
+    ARTE art_atk_t,   SPR_TROO, 0x0030, 0xFF, 0, 0, 0
 
     dq 0

@@ -218,11 +218,8 @@ stereo pan comes from the angle to the source.
 
 An honest list as of now:
 
-- **Sprites.** The pistol, shotgun, zombie, imp, demon and baron have been properly redrawn.
-  The chaingun, rocket launcher, plasma gun, BFG and chainsaw are still on the
-  older, noticeably cruder art.
-- No dedicated attack or death frames for monsters: a shared corpse frame is
-  used instead.
+- Monster death sequences are five frames; the crumple could use more weight.
+- The caco and lost soul still reuse other bodies for their death frames.
 - No intermission screen between levels.
 - Masked mid-textures on two-sided lines are not rendered.
 - No music.
