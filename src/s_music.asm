@@ -7,7 +7,7 @@
 ; ===========================================================================
 
 %define MUS_VOL      20                 ; тише эффектов, чтобы не забивать
-%define MUS_STEPLEN  (SNDRATE/12)        ; длительность шага в отсчётах
+%define MUS_STEPLEN  (SNDRATE/9)        ; длительность шага в отсчётах
 %define MUS_BASSLEN  64
 %define MUS_LEADLEN  128
 %define MUS_PADLEN   64
