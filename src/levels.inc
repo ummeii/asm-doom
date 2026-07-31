@@ -53,6 +53,22 @@ level1:
     MV 2560, 0          ; 11
     MV 1472,  448        ; 12
     MV 1472,  576        ; 13
+    MV 2560, 576        ; 14
+    MV 2560, 448        ; 15
+    MV 2624, 576        ; 16
+    MV 2624, 448        ; 17
+    MV 2624, 0          ; 18
+    MV 2624, 1024       ; 19
+    MV 2880, 1024       ; 20
+    MV 2880, 0          ; 21
+    MV 3136, 1024       ; 22
+    MV 3136, 0          ; 23
+    MV 3392, 1024       ; 24
+    MV 3392, 576        ; 25
+    MV 3392, 448        ; 26
+    MV 3392, 0          ; 27
+    MV 3520, 576        ; 28
+    MV 3520, 448        ; 29
 
 ; --- сектор 0: стартовый зал ---
     MSEC 0, 128, FLAT_FLOOR, FLAT_CEIL, 192, 0, 0
@@ -77,8 +93,10 @@ level1:
     MW 6, 7, TEX_BIGDOOR, 0, TEX_STEP, 0, 0, 0, 1, 0
     MWS 7, 9, TEX_GSTONE
     MWS 9, 10, TEX_GSTONE
-    ; переключатель выхода с уровня (спец 11 = S1 exit)
-    MW 10, 11, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
+    MWS 10, 14, TEX_GSTONE
+    ; дверь во двор
+    MW 14, 15, TEX_BIGDOOR, 0, TEX_STEP, 0, 0, 0, 1, 0
+    MWS 15, 11, TEX_GSTONE
     MWS 11, 8, TEX_GSTONE
 
 ; --- сектор 3: сама дверь (потолок опущен до пола) ---
@@ -88,8 +106,54 @@ level1:
     MWP 7, 6, TEX_BIGDOOR, TEX_STEP, 0
     MWS 6, 12, TEX_DOORTRAK
 
+; --- сектор 4: створка двери во двор ---
+    MSEC 32, 32, FLAT_STEP, FLAT_CEIL, 144, 0, 0
+    MWP 15, 14, TEX_BIGDOOR, TEX_STEP, 0
+    MWS 14, 16, TEX_DOORTRAK
+    MWP 16, 17, TEX_BIGDOOR, TEX_STEP, 0
+    MWS 17, 15, TEX_DOORTRAK
+
+; --- сектор 5: западная дорожка двора ---
+    MSEC 32, 320, FLAT_ROCK, FLAT_SKY, 255, 0, 0
+    MWS 18, 17, TEX_STARTAN
+    MWP 17, 16, TEX_BIGDOOR, TEX_STEP, 0
+    MWS 16, 19, TEX_STARTAN
+    MWS 19, 20, TEX_STARTAN
+    MWP 20, 21, TEX_BLOODWALL, TEX_BLOODWALL, 0
+    MWS 21, 18, TEX_STARTAN
+
+; --- сектор 6: кислотный канал, разъедает (спец 7) ---
+    MSEC 8, 320, FLAT_NUKAGE1, FLAT_SKY, 255, 7, 0
+    MWP 21, 20, TEX_BLOODWALL, TEX_BLOODWALL, 0
+    MWS 20, 22, TEX_BLOODWALL
+    MWP 22, 23, TEX_BLOODWALL, TEX_BLOODWALL, 0
+    MWS 23, 21, TEX_BLOODWALL
+
+; --- сектор 7: восточная дорожка двора ---
+    MSEC 32, 320, FLAT_ROCK, FLAT_SKY, 255, 0, 0
+    MWP 23, 22, TEX_BLOODWALL, TEX_BLOODWALL, 0
+    MWS 22, 24, TEX_STARTAN
+    MWS 24, 25, TEX_STARTAN
+    MWP 25, 26, TEX_SUPPORT, TEX_STEP, 0
+    MWS 26, 27, TEX_STARTAN
+    MWS 27, 23, TEX_STARTAN
+
+; --- сектор 8: ниша выхода на уступе ---
+    MSEC 56, 176, FLAT_LIGHT, FLAT_CEIL, 224, 0, 0
+    MWP 26, 25, TEX_SUPPORT, TEX_STEP, 0
+    MWS 25, 28, TEX_METAL
+    MW 28, 29, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
+    MWS 29, 26, TEX_METAL
+
 ; --- объекты ---
     MTH 512, 512, 0, 1, 7               ; старт игрока
+    MTH 2760, 512, 0, 2025, 7           ; костюм радзащиты перед каналом
+    MTH 2760, 240, 180, 3001, 7         ; имп на дорожке
+    MTH 2760, 800, 180, 3004, 7         ; зомби на дорожке
+    MTH 3260, 512, 180, 3002, 7         ; демон за каналом
+    MTH 3260, 200, 0,   2008, 7         ; патроны
+    MTH 3260, 820, 0,   2012, 7         ; аптечка
+    MTH 3300, 512, 0,   2019, MTF_HARD  ; тяжёлая броня на «ультре»
     MTH 1800, 512, 180, 3004, 7          ; зомби
     MTH 2200, 800, 180, 3001, 7         ; имп
     MTH 2200, 240, 180, 9, 7            ; сержант

@@ -54,6 +54,22 @@ G_LoadLevel:
     ret
 
 ; ---------------------------------------------------------------------------
+;  G_NextLevel -- перейти на следующую карту (после экрана статистики)
+; ---------------------------------------------------------------------------
+G_NextLevel:
+    push    rbx
+    movzx   eax, byte [g_curlevel]
+    inc     eax
+    cmp     eax, NUMLEVELS
+    jb      .ok
+    xor     eax, eax
+.ok:
+    mov     [g_curlevel], al
+    call    G_LoadLevel
+    pop     rbx
+    ret
+
+; ---------------------------------------------------------------------------
 ;  G_SetFastParms -- «кошмар» ускоряет демонов и снаряды (как G_SetFastParms)
 ; ---------------------------------------------------------------------------
 G_SetFastParms:
@@ -282,6 +298,11 @@ G_Ticker:
     push    rbx
     cmp     dword [wipe_state], WIPE_OFF
     jne     .done                       ; пока экран плавится, игра стоит
+    cmp     byte [g_gamestate], 2
+    jne     .notwi
+    call    WI_Ticker
+    jmp     .done
+.notwi:
     cmp     byte [g_gamestate], 0
     jne     .level
     call    M_Ticker
@@ -331,19 +352,11 @@ G_Ticker:
     call    G_LoadLevel
     jmp     .done
 .noreborn:
-    ; переход на следующий уровень
+    ; переход на следующий уровень -- сперва экран статистики
     cmp     byte [g_exitlevel], 0
     je      .done
     mov     byte [g_exitlevel], 0
-    movzx   eax, byte [g_curlevel]
-    inc     eax
-    cmp     eax, NUMLEVELS
-    jb      .nextok
-    xor     eax, eax
-.nextok:
-    mov     [g_curlevel], al
-    call    V_StartWipe
-    call    G_LoadLevel
+    call    WI_Start
 .done:
     pop     rbx
     ret
@@ -354,6 +367,11 @@ G_Ticker:
 D_Display:
     push    rbx
     push    rdi
+    cmp     byte [g_gamestate], 2
+    jne     .notwi
+    call    WI_Drawer
+    jmp     .tint
+.notwi:
     cmp     byte [g_gamestate], 0
     jne     .level
     call    M_Drawer

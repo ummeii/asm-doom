@@ -71,6 +71,14 @@ st_facedir:     resd 1
 st_facecount:   resd 1
 st_rampage:     resd 1
 st_lastdmg:     resd 1
+wi_stage:       resd 1
+wi_shown:       resd 1
+wi_pause:       resd 1
+wi_pkills:      resd 1
+wi_pitems:      resd 1
+wi_psecret:     resd 1
+wi_ptime:       resd 1
+wi_final:       resd 4
     alignb 16
 g_bmpbuf:       resb 14 + 40 + 1024 + SCREENWIDTH*SCREENHEIGHT
 

@@ -46,6 +46,7 @@
 %include "src/st_bar.asm"
 %include "src/am_map.asm"
 %include "src/m_menu.asm"
+%include "src/wi_stuff.asm"
 %include "src/f_wipe.asm"
 %include "src/g_game.asm"
 

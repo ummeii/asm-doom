@@ -424,3 +424,16 @@ keyarts:
     dq art_keyb
     dq art_keyy
     dq art_keyr
+
+str_finished:   db 'LEVEL     FINISHED', 0
+str_items:      db 'ITEMS', 0
+str_wisecret:   db 'SECRET', 0
+str_wikills:    db 'KILLS', 0
+str_time:       db 'TIME', 0
+str_press:      db 'PRESS FIRE TO CONTINUE', 0
+
+    align 8
+wi_labels:
+    dq str_wikills
+    dq str_items
+    dq str_wisecret
