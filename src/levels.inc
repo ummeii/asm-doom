@@ -518,8 +518,136 @@ level3:
     MTH 1760, 400, 0,   2008, 7      ; патроны
     MEND
 
+; ===========================================================================
+;  Уровень 4 -- хаб под небом, три крыла
+;
+;  Из центрального зала расходятся коридоры: север -- к синему ключу,
+;  восток -- к запертой двери и выходу, юг -- в арсенал (спец 9, секрет).
+; ===========================================================================
+    align 8
+level4:
+; --- вершины ---
+    MV 512,  512        ; 0
+    MV 512,  1024       ; 1
+    MV 704,  1024       ; 2
+    MV 832,  1024       ; 3
+    MV 1024, 1024       ; 4
+    MV 1024, 832        ; 5
+    MV 1024, 704        ; 6
+    MV 1024, 512        ; 7
+    MV 832,  512        ; 8
+    MV 704,  512        ; 9
+    MV 704,  1408       ; 10
+    MV 832,  1408       ; 11
+    MV 512,  1408       ; 12
+    MV 512,  1920       ; 13
+    MV 1152, 1920       ; 14
+    MV 1152, 1408       ; 15
+    MV 1408, 832        ; 16
+    MV 1408, 704        ; 17
+    MV 1472, 832        ; 18
+    MV 1472, 704        ; 19
+    MV 1472, 512        ; 20
+    MV 1472, 1024       ; 21
+    MV 1984, 1024       ; 22
+    MV 1984, 512        ; 23
+    MV 704,  128        ; 24
+    MV 832,  128        ; 25
+    MV 384,  0          ; 26
+    MV 384,  128        ; 27
+    MV 1152, 128        ; 28
+    MV 1152, 0          ; 29
+
+; --- сектор 0: центральный зал под небом ---
+    MSEC 0, 320, FLAT_ROCK, FLAT_SKY, 224, 0, 0
+    MWS 0, 1, TEX_GSTONE
+    MWS 1, 2, TEX_GSTONE
+    MWP 2, 3, TEX_GSTONE, TEX_STEP, 0
+    MWS 3, 4, TEX_GSTONE
+    MWS 4, 5, TEX_GSTONE
+    MWP 5, 6, TEX_GSTONE, TEX_STEP, 0
+    MWS 6, 7, TEX_GSTONE
+    MWS 7, 8, TEX_GSTONE
+    MWP 8, 9, TEX_GSTONE, TEX_STEP, 0
+    MWS 9, 0, TEX_GSTONE
+
+; --- сектор 1: северный коридор ---
+    MSEC 0, 128, FLAT_STEP, FLAT_CEIL, 112, 1, 0
+    MWS 2, 10, TEX_METAL
+    MWP 10, 11, TEX_METAL, TEX_STEP, 0
+    MWS 11, 3, TEX_METAL
+    MWP 3, 2, TEX_GSTONE, TEX_STEP, 0
+
+; --- сектор 2: зал с ключом ---
+    MSEC 24, 200, FLAT_CARPET, FLAT_LIGHT, 232, 0, 0
+    MWS 12, 13, TEX_COMP
+    MWS 13, 14, TEX_COMP
+    MWS 14, 15, TEX_COMP
+    MWS 15, 11, TEX_COMP
+    MWP 11, 10, TEX_METAL, TEX_STEP, 0
+    MWS 10, 12, TEX_COMP
+
+; --- сектор 3: восточный коридор ---
+    MSEC 0, 128, FLAT_STEP, FLAT_CEIL, 104, 3, 0
+    MWP 6, 5, TEX_GSTONE, TEX_STEP, 0
+    MWS 5, 16, TEX_STARTAN
+    MW 16, 17, TEX_DOORBLU, 0, TEX_STEP, 0, 0, 0, 26, 0
+    MWS 17, 6, TEX_STARTAN
+
+; --- сектор 4: створка синей двери ---
+    MSEC 0, 0, FLAT_STEP, FLAT_CEIL, 144, 0, 0
+    MWP 17, 16, TEX_DOORBLU, TEX_STEP, 0
+    MWS 16, 18, TEX_DOORTRAK
+    MWP 18, 19, TEX_DOORBLU, TEX_STEP, 0
+    MWS 19, 17, TEX_DOORTRAK
+
+; --- сектор 5: зал выхода ---
+    MSEC 16, 224, FLAT_LIGHT, FLAT_CEIL, 248, 12, 0
+    MWS 20, 19, TEX_LITE
+    MWP 19, 18, TEX_DOORBLU, TEX_STEP, 0
+    MWS 18, 21, TEX_LITE
+    MWS 21, 22, TEX_LITE
+    MW 22, 23, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
+    MWS 23, 20, TEX_LITE
+
+; --- сектор 6: южный коридор ---
+    MSEC 0, 112, FLAT_STEP, FLAT_CEIL, 96, 1, 0
+    MWS 24, 9, TEX_BROWN
+    MWP 9, 8, TEX_GSTONE, TEX_STEP, 0
+    MWS 8, 25, TEX_BROWN
+    MWP 25, 24, TEX_BROWN, TEX_STEP, 0
+
+; --- сектор 7: арсенал (спец 9 -- секрет) ---
+    MSEC 0, 160, FLAT_GRATE, FLAT_LIGHT, 208, 9, 0
+    MWS 26, 27, TEX_SUPPORT
+    MWS 27, 24, TEX_SUPPORT
+    MWP 24, 25, TEX_BROWN, TEX_STEP, 0
+    MWS 25, 28, TEX_SUPPORT
+    MWS 28, 29, TEX_SUPPORT
+    MWS 29, 26, TEX_SUPPORT
+
+; --- объекты ---
+    MTH 768,  768,  0,   1,    7    ; старт игрока в центре
+    MTH 600,  900,  180, 3004, 7    ; зомби в зале
+    MTH 950,  900,  180, 9,    7    ; сержант
+    MTH 768,  600,  0,   2007, 7    ; обойма
+    MTH 830,  1700, 0,   5,    7    ; синий ключ
+    MTH 620,  1550, 180, 3001, 7    ; имп у ключа
+    MTH 1040, 1550, 180, 3001, 7    ; имп у ключа
+    MTH 830,  1850, 180, 3005, 7    ; какодемон
+    MTH 500,  60,   0,   2001, 7    ; дробовик в арсенале
+    MTH 700,  60,   0,   2002, 7    ; пулемёт
+    MTH 900,  60,   0,   2019, 7    ; тяжёлая броня
+    MTH 1050, 60,   0,   2049, 7    ; ящик патронов
+    MTH 1200, 768,  180, 3002, 7    ; демон в восточном коридоре
+    MTH 1700, 768,  180, 3003, MTF_HARD ; барон у выхода
+    MTH 1900, 600,  0,   2012, 7    ; аптечка
+    MTH 1900, 900,  0,   2013, MTF_HARD ; сфера души на «ультре»
+    MEND
+
     align 8
 levellist:
     dq level1
     dq level2
     dq level3
+    dq level4

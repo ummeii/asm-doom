@@ -3,7 +3,7 @@
 ; ===========================================================================
 
 %define FUZZTABLE 50
-%define NUMLEVELS 3
+%define NUMLEVELS 4
 %define FF_FULLBRIGHT 0x8000
 %define AM_ARROWSEG 3
 %define USERANGE     (64*FRACUNIT)

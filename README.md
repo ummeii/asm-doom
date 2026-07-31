@@ -215,7 +215,10 @@ stereo pan comes from the angle to the source.
 2. A lift, a blue keycard, a locked door, a teleport. The exit hall is
    geometrically disconnected from the rest of the map — the teleport is the
    only way in.
-3. A four-step staircase and a crusher above a nukage pit.
+3. A four-step staircase and a crusher above a nukage pit, plus a northern
+   passage to an upper yard under the sky.
+4. A hub under the sky with three wings: north to the blue key, east through a
+   locked door to the exit, south into a hidden armoury.
 
 ---
 
