@@ -69,6 +69,14 @@ level1:
     MV 3392, 0          ; 27
     MV 3520, 576        ; 28
     MV 3520, 448        ; 29
+    MV 1792, 1024       ; 30
+    MV 1920, 1024       ; 31
+    MV 1792, 1536       ; 32
+    MV 1920, 1536       ; 33
+    MV 1536, 1536       ; 34
+    MV 1536, 2048       ; 35
+    MV 2176, 2048       ; 36
+    MV 2176, 1536       ; 37
 
 ; --- сектор 0: стартовый зал ---
     MSEC 0, 128, FLAT_FLOOR, FLAT_CEIL, 192, 0, 0
@@ -92,10 +100,13 @@ level1:
     MWS 8, 6, TEX_GSTONE
     MW 6, 7, TEX_BIGDOOR, 0, TEX_STEP, 0, 0, 0, 1, 0
     MWS 7, 9, TEX_GSTONE
-    MWS 9, 10, TEX_GSTONE
+    MWS 9, 30, TEX_GSTONE
+    MWP 30, 31, TEX_GSTONE, TEX_STEP, 0     ; проём в северный коридор
+    MWS 31, 10, TEX_GSTONE
     MWS 10, 14, TEX_GSTONE
     ; дверь во двор
-    MW 14, 15, TEX_BIGDOOR, 0, TEX_STEP, 0, 0, 0, 1, 0
+    ; дверь во двор заперта: спец 26 = нужен синий ключ
+    MW 14, 15, TEX_DOORBLU, 0, TEX_STEP, 0, 0, 0, 26, 0
     MWS 15, 11, TEX_GSTONE
     MWS 11, 8, TEX_GSTONE
 
@@ -108,15 +119,15 @@ level1:
 
 ; --- сектор 4: створка двери во двор ---
     MSEC 32, 32, FLAT_STEP, FLAT_CEIL, 144, 0, 0
-    MWP 15, 14, TEX_BIGDOOR, TEX_STEP, 0
+    MWP 15, 14, TEX_DOORBLU, TEX_STEP, 0
     MWS 14, 16, TEX_DOORTRAK
-    MWP 16, 17, TEX_BIGDOOR, TEX_STEP, 0
+    MWP 16, 17, TEX_DOORBLU, TEX_STEP, 0
     MWS 17, 15, TEX_DOORTRAK
 
 ; --- сектор 5: западная дорожка двора ---
     MSEC 32, 320, FLAT_ROCK, FLAT_SKY, 255, 0, 0
     MWS 18, 17, TEX_STARTAN
-    MWP 17, 16, TEX_BIGDOOR, TEX_STEP, 0
+    MWP 17, 16, TEX_DOORBLU, TEX_STEP, 0
     MWS 16, 19, TEX_STARTAN
     MWS 19, 20, TEX_STARTAN
     MWP 20, 21, TEX_BLOODWALL, TEX_BLOODWALL, 0
@@ -145,8 +156,30 @@ level1:
     MW 28, 29, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
     MWS 29, 26, TEX_METAL
 
+; --- сектор 9: северный коридор ---
+    MSEC 32, 128, FLAT_STEP, FLAT_CEIL, 128, 0, 0
+    MWS 30, 32, TEX_BROWN
+    MWP 32, 33, TEX_BROWN, TEX_STEP, 0
+    MWS 33, 31, TEX_BROWN
+    MWP 31, 30, TEX_GSTONE, TEX_STEP, 0
+
+; --- сектор 10: зал с ключом ---
+    MSEC 48, 208, FLAT_CARPET, FLAT_LIGHT, 208, 0, 0
+    MWS 34, 35, TEX_MARBLE
+    MWS 35, 36, TEX_MARBLE
+    MWS 36, 37, TEX_MARBLE
+    MWS 37, 33, TEX_MARBLE
+    MWP 33, 32, TEX_BROWN, TEX_STEP, 0
+    MWS 32, 34, TEX_MARBLE
+
 ; --- объекты ---
     MTH 512, 512, 0, 1, 7               ; старт игрока
+    MTH 1856, 1900, 0,   5,    7        ; синий ключ в северном крыле
+    MTH 1650, 1750, 180, 3001, 7        ; имп у ключа
+    MTH 2050, 1750, 180, 9,    7        ; сержант у ключа
+    MTH 1856, 1600, 0,   2008, 7        ; патроны в коридоре
+    MTH 1700, 1950, 0,   2012, 7        ; аптечка
+    MTH 2050, 1950, 180, 3002, MTF_HARD ; демон на «ультре»
     MTH 2760, 512, 0, 2025, 7           ; костюм радзащиты перед каналом
     MTH 2760, 240, 180, 3001, 7         ; имп на дорожке
     MTH 2760, 800, 180, 3004, 7         ; зомби на дорожке
