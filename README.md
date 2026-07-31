@@ -1,6 +1,6 @@
 **English** | [Русский](README.ru.md)
 
-# asm-doom — a DOOM parody written entirely in assembly
+# asm-doom — a DOOM-like game written entirely in assembly
 
 > ⚠️ **Work in progress.** It is playable, but plenty is still unfinished —
 > there is an honest list at the end of this file. Breaking changes may land
