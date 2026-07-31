@@ -43,6 +43,7 @@
 %include "src/p_spec.asm"
 %include "src/p_ceil.asm"
 %include "src/s_sound.asm"
+%include "src/s_music.asm"
 %include "src/st_bar.asm"
 %include "src/am_map.asm"
 %include "src/m_menu.asm"

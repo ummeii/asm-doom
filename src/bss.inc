@@ -79,6 +79,11 @@ wi_pitems:      resd 1
 wi_psecret:     resd 1
 wi_ptime:       resd 1
 wi_final:       resd 4
+mus_step:       resd 1
+mus_cnt:        resd 1
+mus_env:        resd 1
+mus_ph1:        resd 1
+mus_ph2:        resd 1
     alignb 16
 g_bmpbuf:       resb 14 + 40 + 1024 + SCREENWIDTH*SCREENHEIGHT
 

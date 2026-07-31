@@ -461,8 +461,10 @@ S_MixBuffer:
     mov     rdi, rcx
     xor     r12d, r12d                  ; номер кадра
 .frame:
-    xor     r13d, r13d                  ; левый
-    xor     r14d, r14d                  ; правый
+    call    S_MusicSample               ; музыка идёт фоном под эффектами
+    imul    eax, 256
+    mov     r13d, eax                   ; левый
+    mov     r14d, eax                   ; правый
     xor     ebx, ebx
 .chan:
     imul    eax, ebx, CHAN_SIZE
