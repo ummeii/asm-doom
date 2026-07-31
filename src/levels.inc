@@ -152,34 +152,34 @@ level1:
 ; --- сектор 7: восточная дорожка двора ---
     MSEC 32, 320, FLAT_ROCK, FLAT_SKY, 255, 0, 0
     MWP 23, 22, TEX_BLOODWALL, TEX_BLOODWALL, 0
-    MWS 22, 24, TEX_STARTAN
-    MWS 24, 25, TEX_STARTAN
+    MWS 22, 24, TEX_GSTONE
+    MWS 24, 25, TEX_GSTONE
     MWP 25, 26, TEX_SUPPORT, TEX_STEP, 0
-    MWS 26, 27, TEX_STARTAN
-    MWS 27, 23, TEX_STARTAN
+    MWS 26, 27, TEX_GSTONE
+    MWS 27, 23, TEX_GSTONE
 
 ; --- сектор 8: ниша выхода на уступе ---
     MSEC 56, 176, FLAT_LIGHT, FLAT_CEIL, 248, 12, 0
     MWP 26, 25, TEX_SUPPORT, TEX_STEP, 0
-    MWS 25, 28, TEX_METAL
+    MWS 25, 28, TEX_LITE
     MW 28, 29, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
-    MWS 29, 26, TEX_METAL
+    MWS 29, 26, TEX_LITE
 
 ; --- сектор 9: северный коридор ---
     MSEC 32, 128, FLAT_STEP, FLAT_CEIL, 104, 3, 0
-    MWS 30, 32, TEX_BROWN
-    MWP 32, 33, TEX_BROWN, TEX_STEP, 0
-    MWS 33, 31, TEX_BROWN
+    MWS 30, 32, TEX_METAL
+    MWP 32, 33, TEX_METAL, TEX_STEP, 0
+    MWS 33, 31, TEX_METAL
     MWP 31, 30, TEX_GSTONE, TEX_STEP, 0
 
 ; --- сектор 10: зал с ключом ---
     MSEC 48, 208, FLAT_CARPET, FLAT_LIGHT, 232, 0, 0
-    MWS 34, 35, TEX_MARBLE
-    MWS 35, 36, TEX_MARBLE
-    MWS 36, 37, TEX_MARBLE
-    MWS 37, 33, TEX_MARBLE
+    MWS 34, 35, TEX_COMP
+    MWS 35, 36, TEX_COMP
+    MWS 36, 37, TEX_COMP
+    MWS 37, 33, TEX_COMP
     MWP 33, 32, TEX_BROWN, TEX_STEP, 0
-    MWS 32, 34, TEX_MARBLE
+    MWS 32, 34, TEX_COMP
 
 ; --- сектор 11: створка тайника ---
     MSEC 0, 0, FLAT_FLOOR, FLAT_CEIL, 160, 0, 0
@@ -319,10 +319,10 @@ level2:
 ; --- сектор 5: камера перед телепортом ---
     MSEC 64, 160, FLAT_ROCK, FLAT_CEIL, 120, 3, 0
     MWP 17, 16, TEX_DOORBLU, TEX_STEP, 0
-    MWS 16, 18, TEX_MARBLE
+    MWS 16, 18, TEX_BLOODWALL
     ; линия телепорта: спец 97 = WR, цель -- сектор с тегом 2
-    MW 18, 19, TEX_MARBLE, 0, TEX_STEP, 0, 0, 0, 97, 2
-    MWS 19, 17, TEX_MARBLE
+    MW 18, 19, TEX_BLOODWALL, 0, TEX_STEP, 0, 0, 0, 97, 2
+    MWS 19, 17, TEX_BLOODWALL
 
 ; --- сектор 6: площадка телепорта ---
     MSEC 64, 160, FLAT_ROCK, FLAT_LIGHT, 208, 12, 0
@@ -340,10 +340,10 @@ level2:
 
 ; --- сектор 8: галерея над залом ---
     MSEC 88, 320, FLAT_STEP, FLAT_SKY, 240, 0, 0
-    MWS 26, 28, TEX_METAL
+    MWS 26, 28, TEX_SUPPORT
     ; тайник: дверь под текстуру стены
-    MW 28, 29, TEX_METAL, 0, TEX_STEP, 0, 0, 0, 1, 0
-    MWS 29, 27, TEX_METAL
+    MW 28, 29, TEX_SUPPORT, 0, TEX_STEP, 0, 0, 0, 1, 0
+    MWS 29, 27, TEX_SUPPORT
     MWP 27, 26, TEX_GSTONE, TEX_SUPPORT, 0
 
 ; --- сектор 9: створка тайника ---
@@ -480,12 +480,12 @@ level3:
 
 ; --- сектор 7: верхний уступ с выходом ---
     MSEC 40, 168, FLAT_CARPET, FLAT_LIGHT, 248, 12, 0
-    MWS 16, 15, TEX_MARBLE
-    MWP 15, 14, TEX_MARBLE, TEX_STEP, 0
-    MWS 14, 17, TEX_MARBLE
-    MWS 17, 18, TEX_MARBLE
+    MWS 16, 15, TEX_LITE
+    MWP 15, 14, TEX_LITE, TEX_STEP, 0
+    MWS 14, 17, TEX_LITE
+    MWS 17, 18, TEX_LITE
     MW 18, 19, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
-    MWS 19, 16, TEX_MARBLE
+    MWS 19, 16, TEX_LITE
 
 ; --- сектор 8: проход из ниши ---
     MSEC 0, 192, FLAT_STEP, FLAT_CEIL, 144, 0, 0
@@ -496,12 +496,12 @@ level3:
 
 ; --- сектор 9: верхний зал под небом ---
     MSEC 24, 320, FLAT_ROCK, FLAT_SKY, 255, 0, 0
-    MWS 27, 28, TEX_GSTONE
-    MWS 28, 29, TEX_GSTONE
-    MWS 29, 30, TEX_GSTONE
-    MWS 30, 26, TEX_GSTONE
+    MWS 27, 28, TEX_STARTAN
+    MWS 28, 29, TEX_STARTAN
+    MWS 29, 30, TEX_STARTAN
+    MWS 30, 26, TEX_STARTAN
     MWP 26, 25, TEX_SUPPORT, TEX_STEP, 0
-    MWS 25, 27, TEX_GSTONE
+    MWS 25, 27, TEX_STARTAN
 
 ; --- объекты ---
     MTH 256, 256, 0,   1,    7      ; старт игрока
