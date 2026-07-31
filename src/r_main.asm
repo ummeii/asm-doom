@@ -35,8 +35,8 @@
 %define DS_SIDEOFS      80
 %define DS_PAD          84
 %define DRAWSEG_SIZE    88
-%define MAXDRAWSEGS     512
-%define MAXOPENINGS     (SCREENWIDTH*64)
+%define MAXDRAWSEGS     2048
+%define MAXOPENINGS     (SCREENWIDTH*256)
 
 ; ---------------------------------------------------------------------------
 ;  R_InitRender

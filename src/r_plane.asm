@@ -2,7 +2,7 @@
 ;  r_plane.asm -- визплейны: полы, потолки и небо (алгоритм DOOM)
 ; ===========================================================================
 
-%define MAXVISPLANES 160
+%define MAXVISPLANES 2048
 %define VP_HEIGHT   0
 %define VP_PIC      4
 %define VP_LIGHT    8
