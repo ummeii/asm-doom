@@ -84,6 +84,7 @@ mus_cnt:        resd 1
 mus_env:        resd 1
 mus_ph1:        resd 1
 mus_ph2:        resd 1
+mus_ph3:        resd 1
     alignb 16
 g_bmpbuf:       resb 14 + 40 + 1024 + SCREENWIDTH*SCREENHEIGHT
 

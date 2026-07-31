@@ -7,9 +7,10 @@
 ; ===========================================================================
 
 %define MUS_VOL      22                 ; тише эффектов, чтобы не забивать
-%define MUS_STEPLEN  (SNDRATE/8)        ; длительность шага в отсчётах
-%define MUS_BASSLEN  16
-%define MUS_LEADLEN  32
+%define MUS_STEPLEN  (SNDRATE/7)        ; длительность шага в отсчётах
+%define MUS_BASSLEN  64
+%define MUS_LEADLEN  128
+%define MUS_PADLEN   96
 
 ; ---------------------------------------------------------------------------
 ;  S_MusicSample -> eax = отсчёт музыки (-128..127), уже с громкостью
@@ -87,6 +88,27 @@ S_MusicSample:
     sar     ecx, 3
     add     ebx, ecx
 .nolead:
+
+    ; --- подклад: длинные ноты другим периодом, петля не совпадает с прочими ---
+    mov     eax, [mus_step]
+    xor     edx, edx
+    mov     ecx, MUS_PADLEN
+    div     ecx
+    lea     rsi, [mus_pad]
+    mov     eax, [rsi + rdx*4]
+    test    eax, eax
+    jz      .nopad
+    add     [mus_ph3], eax
+    mov     eax, [mus_ph3]
+    test    eax, 0x8000
+    jz      .p0
+    mov     ecx, 14
+    jmp     .padd
+.p0:
+    mov     ecx, -14
+.padd:
+    add     ebx, ecx                    ; подклад держит ровную громкость
+.nopad:
 
     mov     eax, ebx
     imul    eax, MUS_VOL
