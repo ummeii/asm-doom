@@ -149,6 +149,7 @@ src/m_menu.asm      skill selection menu
 src/st_bar.asm      status bar and the face
 src/wi_stuff.asm    the intermission tally between levels
 src/s_sound.asm     mixer on top of waveOut
+src/s_music.asm     two-voice music synthesised inside the mixer
 src/info.asm        object state and property tables
 src/art*.inc        pixel art: monsters, weapons, items, effects, HUD
 src/levels.inc      level data
@@ -225,9 +226,8 @@ An honest list as of now:
 - Monster death sequences are five frames; the crumple could use more weight.
 - The renderer draws sprites and geometry from ellipse primitives with
   depth-based shading, which reads as volume but lacks hand-placed detail.
-- The caco and lost soul still reuse other bodies for their death frames.
+- The caco and lost soul reuse other bodies for their death frames only.
 - Masked mid-textures on two-sided lines are not rendered.
-- No music.
 - No multiplayer, and none planned.
 
 ## License

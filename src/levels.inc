@@ -77,11 +77,20 @@ level1:
     MV 1536, 2048       ; 35
     MV 2176, 2048       ; 36
     MV 2176, 1536       ; 37
+    MV 384,  1024       ; 38
+    MV 640,  1024       ; 39
+    MV 384,  1088       ; 40
+    MV 640,  1088       ; 41
+    MV 384,  1408       ; 42
+    MV 640,  1408       ; 43
 
 ; --- сектор 0: стартовый зал ---
     MSEC 0, 128, FLAT_FLOOR, FLAT_CEIL, 192, 0, 0
     MWS 0, 1, TEX_TEK1
-    MWS 1, 2, TEX_TEK1
+    MWS 1, 38, TEX_TEK1
+    ; тайник: дверь с текстурой стены, снаружи не отличить
+    MW 38, 39, TEX_TEK1, 0, TEX_STEP, 0, 0, 0, 1, 0
+    MWS 39, 2, TEX_TEK1
     MWS 2, 3, TEX_TEK1
     MWP 3, 4, TEX_TEK1, TEX_STEP, 0
     MWS 4, 5, TEX_TEK1
@@ -172,8 +181,25 @@ level1:
     MWP 33, 32, TEX_BROWN, TEX_STEP, 0
     MWS 32, 34, TEX_MARBLE
 
+; --- сектор 11: створка тайника ---
+    MSEC 0, 0, FLAT_FLOOR, FLAT_CEIL, 160, 0, 0
+    MWS 38, 40, TEX_DOORTRAK
+    MWP 40, 41, TEX_TEK1, TEX_STEP, 0
+    MWS 41, 39, TEX_DOORTRAK
+    MWP 39, 38, TEX_TEK1, TEX_STEP, 0
+
+; --- сектор 12: тайник (спец 9 -- засчитывается как секрет) ---
+    MSEC 0, 144, FLAT_LIGHT, FLAT_LIGHT, 224, 9, 0
+    MWS 40, 42, TEX_COMP
+    MWS 42, 43, TEX_COMP
+    MWS 43, 41, TEX_COMP
+    MWP 41, 40, TEX_TEK1, TEX_STEP, 0
+
 ; --- объекты ---
     MTH 512, 512, 0, 1, 7               ; старт игрока
+    MTH 512, 1200, 0, 2002, 7           ; пулемёт в тайнике
+    MTH 440, 1330, 0, 2013, 7           ; сфера души
+    MTH 584, 1330, 0, 8,    7           ; рюкзак
     MTH 1856, 1900, 0,   5,    7        ; синий ключ в северном крыле
     MTH 1650, 1750, 180, 3001, 7        ; имп у ключа
     MTH 2050, 1750, 180, 9,    7        ; сержант у ключа
