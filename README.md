@@ -213,9 +213,9 @@ stereo pan comes from the angle to the source.
 
 An honest list as of now:
 
-- **Sprites.** The pistol, the zombie and the imp have been properly redrawn.
-  The shotgun, chaingun, rocket launcher, plasma gun, BFG, chainsaw, demon and
-  baron are still on the older, noticeably cruder art.
+- **Sprites.** The pistol, shotgun, zombie, imp, demon and baron have been properly redrawn.
+  The chaingun, rocket launcher, plasma gun, BFG and chainsaw are still on the
+  older, noticeably cruder art.
 - No dedicated attack or death frames for monsters: a shared corpse frame is
   used instead.
 - No intermission screen between levels.
