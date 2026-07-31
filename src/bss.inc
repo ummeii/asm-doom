@@ -408,7 +408,7 @@ psp_y:          resd 1
 clipbot:        resd 320
 cliptop:        resd 320
     alignb 16
-bakebuf:        resb 128*160
+bakebuf:        resb 256*256
 bake_w:         resd 1
 bake_h:         resd 1
 sp_color:       resd 1

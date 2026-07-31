@@ -148,39 +148,39 @@ R_ApplyArt:
 
     ; --- вспышка: тот же холст, но арт вверху, у дульного среза ---
 .flash:
-    mov     ecx, 100
-    mov     edx, 128
+    mov     ecx, 176
+    mov     edx, 176
     call    SPR_Begin
-    mov     ecx, 50
+    mov     ecx, 88
     mov     eax, r13d
     shr     eax, 1
     sub     ecx, eax
-    mov     edx, 50                     ; на уровне дульного среза
+    mov     edx, 26                     ; на уровне дульного среза
     mov     eax, r14d
     shr     eax, 1
     sub     edx, eax
     mov     r8d, [r12 + AL_FLIP]
     call    R_ArtBlit
-    mov     ecx, -110
-    mov     edx, -30
+    mov     ecx, -72
+    mov     edx, 12
     call    SPR_Bake
     jmp     .store
 
-    ; --- оружие: холст 100x128, арт по центру снизу ---
+    ; --- оружие: крупный холст, арт по центру снизу ---
 .weapon:
-    mov     ecx, 100
-    mov     edx, 128
+    mov     ecx, 176
+    mov     edx, 176
     call    SPR_Begin
-    mov     ecx, 50
+    mov     ecx, 88
     mov     eax, r13d
     shr     eax, 1
     sub     ecx, eax
-    mov     edx, 128
+    mov     edx, 176
     sub     edx, r14d
     mov     r8d, [r12 + AL_FLIP]
     call    R_ArtBlit
-    mov     ecx, -110
-    mov     edx, -30                    ; опустить ствол к нижней кромке вида
+    mov     ecx, -72
+    mov     edx, 12                     ; низ спрайта у строки состояния
     call    SPR_Bake
 .store:
     mov     r15, rax                    ; готовый патч
