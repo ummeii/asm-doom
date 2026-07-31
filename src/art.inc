@@ -136,11 +136,11 @@ artlist:
     ; --------------------------- какодемон ------------------------------
     ARTE art_head_fa, SPR_HEAD, FMA,   0xFF, 0, 0, 0
     ARTE art_head_fb, SPR_HEAD, FMB,   0xFF, 0, 0, 0
-    ARTE art_dead_s0, SPR_HEAD, 0x0100, 0xFF, 0, 0, 0
-    ARTE art_dead_s1, SPR_HEAD, 0x0200, 0xFF, 0, 0, 0
-    ARTE art_dead_s2, SPR_HEAD, 0x0400, 0xFF, 0, 0, 0
-    ARTE art_dead_s3, SPR_HEAD, 0x0800, 0xFF, 0, 0, 0
-    ARTE art_dead_s4, SPR_HEAD, 0x1000, 0xFF, 0, 0, 0
+    ARTE art_dead_h0, SPR_HEAD, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_h1, SPR_HEAD, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_h2, SPR_HEAD, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_h3, SPR_HEAD, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_h4, SPR_HEAD, 0x1000, 0xFF, 0, 0, 0
 
     ; ------------------------------ барон -------------------------------
     ARTE art_boss_fa, SPR_BOSS, FMA,   RF,  0, 0, 0
@@ -160,6 +160,11 @@ artlist:
     ; ----------------------- потерянная душа ----------------------------
     ARTE art_skul_fa, SPR_SKUL, FMA,   0xFF, 0, 0, 0
     ARTE art_skul_fb, SPR_SKUL, FMB,   0xFF, 0, 0, 0
+    ARTE art_dead_k0, SPR_SKUL, 0x0100, 0xFF, 0, 0, 0
+    ARTE art_dead_k1, SPR_SKUL, 0x0200, 0xFF, 0, 0, 0
+    ARTE art_dead_k2, SPR_SKUL, 0x0400, 0xFF, 0, 0, 0
+    ARTE art_dead_k3, SPR_SKUL, 0x0800, 0xFF, 0, 0, 0
+    ARTE art_dead_k4, SPR_SKUL, 0x1000, 0xFF, 0, 0, 0
 
     ; ------------------------------ игрок -------------------------------
     ARTE art_poss_fa, SPR_PLAY, FMA,   RF,  0, 0, 0

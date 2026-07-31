@@ -97,7 +97,7 @@ level1:
     MWS 5, 0, TEX_TEK1
 
 ; --- сектор 1: коридор ---
-    MSEC 16, 96, FLAT_STEP, FLAT_CEIL, 144, 0, 0
+    MSEC 16, 96, FLAT_STEP, FLAT_CEIL, 112, 1, 0
     MWP 4, 3, TEX_TEK1, TEX_STEP, 0
     MWS 3, 13, TEX_BROWN
     ; линия двери: спец 1 = открыть-подождать-закрыть по нажатию
@@ -143,7 +143,7 @@ level1:
     MWS 21, 18, TEX_STARTAN
 
 ; --- сектор 6: кислотный канал, разъедает (спец 7) ---
-    MSEC 8, 320, FLAT_NUKAGE1, FLAT_SKY, 255, 7, 0
+    MSEC 8, 320, FLAT_NUKAGE1, FLAT_SKY, 208, 7, 0
     MWP 21, 20, TEX_BLOODWALL, TEX_BLOODWALL, 0
     MWS 20, 22, TEX_BLOODWALL
     MWP 22, 23, TEX_BLOODWALL, TEX_BLOODWALL, 0
@@ -159,21 +159,21 @@ level1:
     MWS 27, 23, TEX_STARTAN
 
 ; --- сектор 8: ниша выхода на уступе ---
-    MSEC 56, 176, FLAT_LIGHT, FLAT_CEIL, 224, 0, 0
+    MSEC 56, 176, FLAT_LIGHT, FLAT_CEIL, 248, 12, 0
     MWP 26, 25, TEX_SUPPORT, TEX_STEP, 0
     MWS 25, 28, TEX_METAL
     MW 28, 29, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
     MWS 29, 26, TEX_METAL
 
 ; --- сектор 9: северный коридор ---
-    MSEC 32, 128, FLAT_STEP, FLAT_CEIL, 128, 0, 0
+    MSEC 32, 128, FLAT_STEP, FLAT_CEIL, 104, 3, 0
     MWS 30, 32, TEX_BROWN
     MWP 32, 33, TEX_BROWN, TEX_STEP, 0
     MWS 33, 31, TEX_BROWN
     MWP 31, 30, TEX_GSTONE, TEX_STEP, 0
 
 ; --- сектор 10: зал с ключом ---
-    MSEC 48, 208, FLAT_CARPET, FLAT_LIGHT, 208, 0, 0
+    MSEC 48, 208, FLAT_CARPET, FLAT_LIGHT, 232, 0, 0
     MWS 34, 35, TEX_MARBLE
     MWS 35, 36, TEX_MARBLE
     MWS 36, 37, TEX_MARBLE
@@ -189,7 +189,7 @@ level1:
     MWP 39, 38, TEX_TEK1, TEX_STEP, 0
 
 ; --- сектор 12: тайник (спец 9 -- засчитывается как секрет) ---
-    MSEC 0, 144, FLAT_LIGHT, FLAT_LIGHT, 224, 9, 0
+    MSEC 0, 144, FLAT_LIGHT, FLAT_LIGHT, 240, 9, 0
     MWS 40, 42, TEX_COMP
     MWS 42, 43, TEX_COMP
     MWS 43, 41, TEX_COMP
@@ -282,7 +282,7 @@ level2:
     MWS 5, 0, TEX_TEK1
 
 ; --- сектор 1: коридор ---
-    MSEC 0, 96, FLAT_STEP, FLAT_CEIL, 128, 0, 0
+    MSEC 0, 96, FLAT_STEP, FLAT_CEIL, 96, 1, 0
     MWP 4, 3, TEX_TEK1, TEX_STEP, 0
     MWS 3, 6, TEX_BROWN
     MWP 6, 7, TEX_METAL, TEX_SUPPORT, 0
@@ -317,7 +317,7 @@ level2:
     MWS 17, 14, TEX_DOORTRAK
 
 ; --- сектор 5: камера перед телепортом ---
-    MSEC 64, 160, FLAT_ROCK, FLAT_CEIL, 160, 0, 0
+    MSEC 64, 160, FLAT_ROCK, FLAT_CEIL, 120, 3, 0
     MWP 17, 16, TEX_DOORBLU, TEX_STEP, 0
     MWS 16, 18, TEX_MARBLE
     ; линия телепорта: спец 97 = WR, цель -- сектор с тегом 2
@@ -332,7 +332,7 @@ level2:
     MWS 21, 19, TEX_MARBLE
 
 ; --- сектор 7: зал выхода, попасть можно только телепортом (тег 2) ---
-    MSEC 0, 160, FLAT_CARPET, FLAT_CEIL, 192, 0, 2
+    MSEC 0, 160, FLAT_CARPET, FLAT_CEIL, 224, 0, 2
     MWS 22, 23, TEX_MARBLE
     MWS 23, 24, TEX_MARBLE
     MW 24, 25, 0, TEX_SWITCH1, 0, 0, 0, ML_BLOCKING, 11, 0
@@ -354,7 +354,7 @@ level2:
     MWP 29, 28, TEX_METAL, TEX_STEP, 0
 
 ; --- сектор 10: тайник (спец 9) ---
-    MSEC 88, 216, FLAT_LIGHT, FLAT_LIGHT, 224, 9, 0
+    MSEC 88, 216, FLAT_LIGHT, FLAT_LIGHT, 240, 9, 0
     MWS 32, 30, TEX_COMP
     MWS 30, 31, TEX_COMP
     MWS 31, 33, TEX_COMP
@@ -436,7 +436,7 @@ level3:
     MWS 5, 0, TEX_STARTAN
 
 ; --- сектор 1: коридор с окном в нишу ---
-    MSEC 0, 128, FLAT_STEP, FLAT_CEIL, 160, 0, 0
+    MSEC 0, 128, FLAT_STEP, FLAT_CEIL, 112, 1, 0
     MWP 4, 3, TEX_STARTAN, TEX_STEP, 0
     MWS 3, 21, TEX_METAL
     MWP 21, 6, TEX_METAL, TEX_STEP, 0
@@ -445,7 +445,7 @@ level3:
     MWS 7, 4, TEX_METAL
 
 ; --- сектор 2: ниша с прессом (тег 2), пол разъедает ---
-    MSEC 0, 128, FLAT_NUKAGE1, FLAT_CEIL, 128, 7, 2
+    MSEC 0, 128, FLAT_NUKAGE1, FLAT_CEIL, 144, 17, 2
     MWS 21, 22, TEX_BLOODWALL
     MWS 22, 23, TEX_BLOODWALL
     MWP 23, 24, TEX_BLOODWALL, TEX_STEP, 0      ; проход в верхний зал
@@ -466,7 +466,7 @@ level3:
     MWP 10, 11, TEX_SUPPORT, TEX_STEP, 0
     MWS 11, 9, TEX_SUPPORT
 
-    MSEC 0, 128, FLAT_STEP, FLAT_CEIL, 160, 0, 0
+    MSEC 0, 128, FLAT_STEP, FLAT_CEIL, 112, 1, 0
     MWP 11, 10, TEX_SUPPORT, TEX_STEP, 0
     MWS 10, 12, TEX_SUPPORT
     MWP 12, 13, TEX_SUPPORT, TEX_STEP, 0
@@ -479,7 +479,7 @@ level3:
     MWS 15, 13, TEX_SUPPORT
 
 ; --- сектор 7: верхний уступ с выходом ---
-    MSEC 40, 168, FLAT_CARPET, FLAT_LIGHT, 224, 0, 0
+    MSEC 40, 168, FLAT_CARPET, FLAT_LIGHT, 248, 12, 0
     MWS 16, 15, TEX_MARBLE
     MWP 15, 14, TEX_MARBLE, TEX_STEP, 0
     MWS 14, 17, TEX_MARBLE
