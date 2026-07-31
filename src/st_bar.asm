@@ -622,7 +622,7 @@ ST_Drawer:
     imul    eax, 7
     add     eax, STY+4
     mov     r8d, eax
-    mov     edx, 302
+    mov     edx, 298
     mov     r9d, PAL_YELLOW+2
     push    rbx
     call    ST_DrawNum
@@ -632,7 +632,7 @@ ST_Drawer:
     imul    eax, 7
     add     eax, STY+4
     mov     r8d, eax
-    mov     edx, 319
+    mov     edx, 317
     mov     r9d, PAL_GRAY+20
     push    rbx
     call    ST_DrawNum

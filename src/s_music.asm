@@ -6,11 +6,11 @@
 ;  к концу шага. Рисунок задан таблицами приращений фазы.
 ; ===========================================================================
 
-%define MUS_VOL      22                 ; тише эффектов, чтобы не забивать
-%define MUS_STEPLEN  (SNDRATE/7)        ; длительность шага в отсчётах
+%define MUS_VOL      20                 ; тише эффектов, чтобы не забивать
+%define MUS_STEPLEN  (SNDRATE/12)        ; длительность шага в отсчётах
 %define MUS_BASSLEN  64
 %define MUS_LEADLEN  128
-%define MUS_PADLEN   96
+%define MUS_PADLEN   64
 
 ; ---------------------------------------------------------------------------
 ;  S_MusicSample -> eax = отсчёт музыки (-128..127), уже с громкостью
@@ -56,10 +56,10 @@ S_MusicSample:
     mov     eax, [mus_ph1]
     test    eax, 0x8000                 ; меандр
     jz      .b0
-    mov     ecx, 40
+    mov     ecx, 52
     jmp     .badd
 .b0:
-    mov     ecx, -40
+    mov     ecx, -52
 .badd:
     imul    ecx, [mus_env]
     sar     ecx, 3
@@ -102,10 +102,10 @@ S_MusicSample:
     mov     eax, [mus_ph3]
     test    eax, 0x8000
     jz      .p0
-    mov     ecx, 14
+    mov     ecx, 30
     jmp     .padd
 .p0:
-    mov     ecx, -14
+    mov     ecx, -30
 .padd:
     add     ebx, ecx                    ; подклад держит ровную громкость
 .nopad:
