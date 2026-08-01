@@ -585,10 +585,27 @@ P_KillMobj:
 .noskull:
     or      dword [rbx + MO_FLAGS], MF_CORPSE|MF_DROPOFF
     sar     dword [rbx + MO_HEIGHT], 2
-    ; счётчик убийств
+    ; --- счётчик убийств: убившему игроку, а за грызню монстров -- первому ---
     test    dword [rbx + MO_FLAGS], MF_COUNTKILL
     jz      .nocount
+    mov     r8d, [curplayer]            ; в окне сейчас погибший
+    test    rsi, rsi
+    jz      .killto0
+    cmp     qword [rsi + MO_PLAYER], 0
+    je      .killto0
+    mov     rcx, rsi
+    call    D_SwitchToMobj
+    jmp     .addkill
+.killto0:
+    cmp     qword [rbx + MO_PLAYER], 0
+    jne     .killdone                   ; игрока задрал монстр -- в зачёт никому
+    xor     ecx, ecx
+    call    D_SwitchPlayer
+.addkill:
     inc     dword [player + PL_KILLCOUNT]
+.killdone:
+    mov     ecx, r8d
+    call    D_SwitchPlayer
 .nocount:
     ; смерть игрока
     cmp     qword [rbx + MO_PLAYER], 0
@@ -596,6 +613,26 @@ P_KillMobj:
     and     dword [rbx + MO_FLAGS], ~MF_SOLID
     mov     dword [player + PL_STATE], PST_DEAD
     call    P_DropWeapon
+    ; --- фраг: плюс убийце, минус за подрыв на себе и за смерть от монстра ---
+    cmp     dword [net_active], 0
+    je      .notplayer
+    test    rsi, rsi
+    jz      .selffrag
+    cmp     rsi, rbx
+    je      .selffrag
+    cmp     qword [rsi + MO_PLAYER], 0
+    je      .selffrag
+    mov     r8d, [curplayer]
+    mov     rcx, rsi
+    call    D_SwitchToMobj
+    mov     ecx, [curplayer]
+    inc     dword [frags + rcx*4]
+    mov     ecx, r8d
+    call    D_SwitchPlayer
+    jmp     .notplayer
+.selffrag:
+    mov     ecx, [curplayer]
+    dec     dword [frags + rcx*4]
 .notplayer:
     mov     rdx, [rbx + MO_INFO]
     mov     edx, [rdx + MI_DEATHSTATE]
@@ -639,8 +676,28 @@ P_KillMobj:
 
 ; ---------------------------------------------------------------------------
 ;  P_DamageMobj(rcx=цель, rdx=источник урона, r8=виновник, r9d=урон)
+;
+;  Здоровье и броня лежат в окне игрока, а стреляют и получают по разным
+;  игрокам, поэтому на время расчёта в окно вдвигается пострадавший.
 ; ---------------------------------------------------------------------------
 P_DamageMobj:
+    push    rbx
+    push    r12
+    mov     r12, rcx
+    mov     ebx, [curplayer]            ; чьё окно вернуть потом
+    cmp     qword [r12 + MO_PLAYER], 0
+    je      .nosw
+    call    D_SwitchToMobj
+    mov     rcx, r12
+.nosw:
+    call    P_DamageMobjRaw
+    mov     ecx, ebx
+    call    D_SwitchPlayer
+    pop     r12
+    pop     rbx
+    ret
+
+P_DamageMobjRaw:
     push    rbx
     push    rsi
     push    rdi

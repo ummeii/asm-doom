@@ -273,6 +273,13 @@
 %define TC_TURN         8
 %define TC_BUTTONS      12
 %define TICCMD_SIZE     16
+; кольцо команд: тик N лежит в ячейке N & BACKUPMASK
+%define BACKUPTICS      16
+%define BACKUPMASK      15
+%define NET_MAXLEAD     2       ; насколько тиков вперёд разрешено уходить
+%define NET_BACKCMDS    4       ; сколько прошлых команд дублируется в пакете
+%define MAXSTARTS       8       ; точек появления на карту
+%define NET_MAGIC       0x4D4F4F44      ; 'DOOM' -- подпись сетевого пакета
 
 ; pspdef: state(dq), tics(dd), sx(dd), sy(dd), pad(dd) = 24
 %define PSP_STATE   0

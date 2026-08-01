@@ -21,6 +21,11 @@ G_InitNew:
     call    G_LoadLevel
     mov     byte [g_gamestate], 0       ; стартуем с меню
     ; тестовые ключи запускают игру сразу
+    ; в сетевой игре меню нет: пока один в меню, второй ждал бы его команд
+    cmp     dword [net_active], 0
+    je      .nonet
+    mov     byte [g_gamestate], 1
+.nonet:
     mov     al, [g_autowalk]
     or      al, [g_autofire]
     or      al, [g_automap0]
@@ -49,13 +54,8 @@ G_LoadLevel:
     mov     rcx, [rcx + rax*8]
     call    P_SetupLevel
     call    P_InitSpecials
-    call    P_SpawnThings
-    call    G_PlayerReborn
-    ; окно уже держит своего игрока -- связываем с ним ячейку массива
-    mov     eax, [consoleplayer]
-    mov     [curplayer], eax
-    mov     rcx, [playermo]
-    mov     [playermos + rax*8], rcx
+    call    P_SpawnThings               ; монстры, предметы и точки старта
+    call    D_SpawnPlayers              ; по телу на каждого игрока
     pop     rbx
     ret
 
@@ -185,6 +185,7 @@ P_SpawnThings:
     push    rsi
     push    rdi
     push    r12
+    mov     dword [numstarts], 0
     xor     ebx, ebx
 .l:
     cmp     ebx, [numthings]
@@ -193,25 +194,18 @@ P_SpawnThings:
     mov     eax, [thingdefs + r12 + TH_TYPE]
     cmp     eax, 1
     jne     .other
-    ; --- старт игрока ---
+    ; --- точка старта: тела расставит D_SpawnPlayers ---
+    mov     eax, [numstarts]
+    cmp     eax, MAXSTARTS
+    jae     .next
+    imul    edi, eax, 12
     mov     ecx, [thingdefs + r12 + TH_X]
-    shl     ecx, 16
-    mov     edx, [thingdefs + r12 + TH_Y]
-    shl     edx, 16
-    mov     r8d, ONFLOORZ
-    mov     r9d, MT_PLAYER
-    call    P_SpawnMobj
-    test    rax, rax
-    jz      .next
-    mov     [playermo], rax
-    mov     [player + PL_MO], rax
+    mov     [pstarts + rdi + 0], ecx
+    mov     ecx, [thingdefs + r12 + TH_Y]
+    mov     [pstarts + rdi + 4], ecx
     mov     ecx, [thingdefs + r12 + TH_ANGLE]
-    imul    ecx, ANG1
-    mov     [rax + MO_ANGLE], ecx
-    mov     qword [rax + MO_PLAYER], player
-    mov     ecx, [rax + MO_Z]
-    add     ecx, VIEWHEIGHT
-    mov     [player + PL_VIEWZ], ecx
+    mov     [pstarts + rdi + 8], ecx
+    inc     dword [numstarts]
     jmp     .next
 .other:
     ; --- фильтр по сложности, как в P_SpawnMapThing ---
@@ -314,7 +308,9 @@ G_Ticker:
     call    M_Ticker
     jmp     .done
 .level:
-    ; в меню по Esc
+    ; в меню по Esc -- но не в сетевой игре, там мир остановить нельзя
+    cmp     dword [net_active], 0
+    jne     .noesc
     cmp     byte [g_keyhit + K_ESC], 0
     je      .noesc
     mov     byte [g_gamestate], 0
@@ -339,11 +335,15 @@ G_Ticker:
     cmp     qword [playermo], 0
     je      .done
 
-    ; своя команда с клавиш -> общий буфер, затем тик всех игроков
-    call    G_BuildTiccmd
-    mov     ecx, [consoleplayer]
-    call    D_StoreCmd
+    ; своя команда с клавиш -> кольцо и в сеть
+    call    D_MakeTic
+    ; мир двигается, только когда команды на этот тик есть у всех
+    call    I_NetPoll
+    call    D_TicReady
+    test    eax, eax
+    jz      .done                       ; ждём соперника
     call    D_RunPlayers
+    inc     dword [d_gametic]
     call    P_RunThinkers
     call    P_UpdateSpecials
     inc     dword [leveltime]
@@ -355,7 +355,9 @@ G_Ticker:
     jnz     .nomsg
     mov     qword [player + PL_MESSAGE], 0
 .nomsg:
-    ; возрождение
+    ; возрождение: в сетевой игре его уже сделал D_RunPlayers, карту не рвём
+    cmp     dword [net_active], 0
+    jne     .noreborn
     cmp     dword [player + PL_STATE], PST_REBORN
     jne     .noreborn
     call    V_StartWipe

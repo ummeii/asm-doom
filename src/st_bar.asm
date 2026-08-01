@@ -562,7 +562,28 @@ ST_Drawer:
     mov     edx, STY+8
     call    ST_DrawArt
 
+    ; --- в бою вместо ячеек оружия счёт фрагов, как в сетевом DOOM ---
+    cmp     dword [net_active], 0
+    je      .armsbox
+    mov     eax, [consoleplayer]
+    mov     ebx, [frags + rax*4]
+    test    ebx, ebx
+    jns     .fragpos
+    mov     ecx, 112
+    mov     edx, STY+10
+    mov     r8d, '-'
+    mov     r9d, PAL_RED+4
+    call    ST_DrawChar
+    neg     ebx
+.fragpos:
+    mov     ecx, ebx
+    mov     edx, 137
+    mov     r8d, STY+5
+    call    ST_BigNum
+    jmp     .armsdone
+
     ; --- ячейки оружия 2..7 ---
+.armsbox:
     xor     ebx, ebx
 .arms:
     mov     eax, ebx
@@ -588,6 +609,7 @@ ST_Drawer:
     inc     ebx
     cmp     ebx, 6
     jb      .arms
+.armsdone:
 
     ; --- мордочка ---
     call    ST_Face
@@ -653,6 +675,10 @@ ST_Drawer:
     mov     r9d, PAL_GRAY+24
     call    ST_DrawString
     mov     rcx, str_larms
+    cmp     dword [net_active], 0
+    je      .armslab
+    mov     rcx, str_lfrags
+.armslab:
     mov     edx, 113
     mov     r8d, STY+24
     mov     r9d, PAL_GRAY+24

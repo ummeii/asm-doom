@@ -83,6 +83,18 @@
     %1 timeBeginPeriod
 %endmacro
 
+%macro LIST_WS2 1
+    %1 WSAStartup
+    %1 socket
+    %1 bind
+    %1 sendto
+    %1 recvfrom
+    %1 ioctlsocket
+    %1 closesocket
+    %1 inet_addr
+    %1 htons
+%endmacro
+
 ; ------------------------------ дескрипторы --------------------------------
     align   8
 import_desc:
@@ -106,6 +118,11 @@ import_desc:
     dd      name_winmm - IMAGEBASE
     dd      iat_winmm - IMAGEBASE
 
+    dd      ilt_ws2 - IMAGEBASE
+    dd      0, 0
+    dd      name_ws2 - IMAGEBASE
+    dd      iat_ws2 - IMAGEBASE
+
     dd      0, 0, 0, 0, 0               ; терминатор
 import_desc_end:
 
@@ -124,6 +141,9 @@ iat_gdi32:
 iat_winmm:
     LIST_WINMM THUNKL
     dq      0
+iat_ws2:
+    LIST_WS2 THUNKL
+    dq      0
 iat_end:
 
 ; ------------------------------ ILT ----------------------------------------
@@ -140,6 +160,9 @@ ilt_gdi32:
 ilt_winmm:
     LIST_WINMM THUNKU
     dq      0
+ilt_ws2:
+    LIST_WS2 THUNKU
+    dq      0
 
 ; ------------------------------ имена --------------------------------------
     align   2
@@ -147,6 +170,7 @@ ilt_winmm:
     LIST_USER32 NAMEDEF
     LIST_GDI32 NAMEDEF
     LIST_WINMM NAMEDEF
+    LIST_WS2 NAMEDEF
 
 name_kernel32:  db 'KERNEL32.dll', 0
     align   2
@@ -155,4 +179,6 @@ name_user32:    db 'USER32.dll', 0
 name_gdi32:     db 'GDI32.dll', 0
     align   2
 name_winmm:     db 'WINMM.dll', 0
+    align   2
+name_ws2:       db 'WS2_32.dll', 0
     align   2

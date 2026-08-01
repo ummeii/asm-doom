@@ -303,10 +303,31 @@ player:         resb PLAYER_SIZE
     alignb 16
 players:        resb MAXPLAYERS*PLAYER_SIZE
 playermos:      resq MAXPLAYERS
-netcmds:        resb MAXPLAYERS*TICCMD_SIZE
+netcmds:        resb MAXPLAYERS*BACKUPTICS*TICCMD_SIZE
 numplayers:     resd 1
 consoleplayer:  resd 1
 curplayer:      resd 1
+d_maketic:      resd 1          ; сколько своих команд уже собрано
+d_gametic:      resd 1          ; сколько тиков уже просчитано
+frags:          resd MAXPLAYERS
+pstarts:        resd MAXSTARTS*3        ; x, y, угол
+numstarts:      resd 1
+; --------------------------------- сеть ------------------------------------
+    alignb 8
+net_sock:       resq 1
+net_mode:       resb 1          ; 0 без сети, 1 ждать соседа, 2 подключиться
+net_addrstr:    resb 64
+net_active:     resd 1
+net_nb:         resd 1
+net_peertic:    resd 1          ; последний тик, команду на который прислали
+net_out:        resb 96
+net_in:         resb 96
+sa_local:       resb 16
+sa_peer:        resb 16
+sa_from:        resb 16
+sa_from_len:    resd 1
+wsa_data:       resb 400
+zero_cmd:       resb TICCMD_SIZE        ; пустая команда, никогда не пишется
 pl_forwardmove: resd 1
 pl_sidemove:    resd 1
 pl_angleturn:   resd 1

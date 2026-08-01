@@ -465,6 +465,7 @@ mus_pad:
 str_lammo:      db 'AMMO', 0
 str_lhealth:    db 'HEALTH', 0
 str_larms:      db 'ARMS', 0
+str_lfrags:     db 'FRAGS', 0
 str_larmor:     db 'ARMOR', 0
 str_abull:      db 'BULL', 0
 str_ashel:      db 'SHEL', 0

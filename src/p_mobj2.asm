@@ -74,13 +74,23 @@ P_RunThinkers:
     cmp     dword [rbx + MO_INUSE], 0
     je      .next
     ; объект игрока -- такой же thinker, как в DOOM: импульс от P_PlayerThink
-    ; превращается в перемещение здесь, в P_XYMovement/P_ZMovement
+    ; превращается в перемещение здесь, в P_XYMovement/P_ZMovement.
+    ; Тело чужого игрока трогает его же поля (высоту взгляда, подобранное
+    ; добро), поэтому в окно вдвигается владелец тела.
+    cmp     qword [rbx + MO_PLAYER], 0
+    je      .nosw
+    mov     rcx, rbx
+    call    D_SwitchToMobj
+.nosw:
     mov     rcx, rbx
     call    P_MobjThinker
 .next:
     inc     esi
     cmp     esi, MAXMOBJS
     jb      .l
+    ; окно возвращаем своему игроку
+    mov     ecx, [consoleplayer]
+    call    D_SwitchPlayer
     pop     rsi
     pop     rbx
     ret

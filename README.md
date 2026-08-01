@@ -95,9 +95,34 @@ You get `doom.exe` (~180 KB). Just double-click it.
 | `-skill N` | skill 1..5 |
 | `-god` | invulnerability (the same `CF_GODMODE` as the original IDDQD) |
 | `-wipe` | trigger the screen melt just before the screenshot |
+| `-net [addr]` | network game: without an address it waits, with one it connects |
 
 The entire project was developed through these flags: the engine plays itself
 hands-free and produces the screenshots that show what broke.
+
+## Multiplayer
+
+Two players over a local network, peer to peer — there is no server, no
+matchmaking and nothing to configure. One side waits, the other dials in by
+address:
+
+```
+doom.exe -net              on the first machine, it waits
+doom.exe -net 192.168.1.5  on the second, address of the first
+```
+
+Coordinates never travel over the wire. What is exchanged is the `ticcmd` —
+sixteen bytes of movement, turn and buttons per tic. The simulation is
+deterministic, so identical commands produce identical worlds on both
+machines; this is exactly how the original netcode worked. A tic is not
+simulated until both commands for it have arrived, which keeps the two
+machines from drifting apart. UDP loses packets, and a lost command means two
+different worlds, so each packet carries the last four commands rather than
+one.
+
+The status bar swaps the weapon cells for a frag counter. Killing the other
+player is +1, blowing yourself up or dying to a monster is −1. The dead
+respawn at a start point without reloading the level.
 
 ## Controls
 
@@ -231,7 +256,8 @@ An honest list as of now:
   depth-based shading, which reads as volume but lacks hand-placed detail.
 - The caco and lost soul reuse other bodies for their death frames only.
 - Masked mid-textures on two-sided lines are not rendered.
-- No multiplayer, and none planned.
+- Multiplayer is two players; more would need commands relayed around a ring.
+- Players look identical on the map: there is no per-player colour remap.
 
 ## License
 

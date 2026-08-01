@@ -109,6 +109,47 @@ I_ParseCmdLine:
     jmp     .scan
 .chkshot7:
     mov     eax, [rsi]
+    cmp     eax, '-net'
+    jne     .chkshot8
+    cmp     byte [rsi+4], ' '
+    je      .netarg
+    cmp     byte [rsi+4], 0
+    jne     .chkshot8
+    mov     byte [net_mode], 1          ; без адреса -- ждём соседа
+    add     rsi, 4
+    jmp     .scan
+.netarg:
+    add     rsi, 5
+.netskip:
+    cmp     byte [rsi], ' '
+    jne     .netaddr
+    inc     rsi
+    jmp     .netskip
+.netaddr:
+    cmp     byte [rsi], '-'             ; следом другой ключ -- значит ждём
+    je      .netlisten
+    cmp     byte [rsi], 0
+    je      .netlisten
+    mov     byte [net_mode], 2
+    lea     r10, [net_addrstr]
+.netcopy:
+    mov     al, [rsi]
+    cmp     al, ' '
+    je      .netdone
+    test    al, al
+    je      .netdone
+    mov     [r10], al
+    inc     r10
+    inc     rsi
+    jmp     .netcopy
+.netdone:
+    mov     byte [r10], 0
+    jmp     .scan
+.netlisten:
+    mov     byte [net_mode], 1
+    jmp     .scan
+.chkshot8:
+    mov     eax, [rsi]
     cmp     eax, '-sho'
     jne     .next
     cmp     byte [rsi+4], 't'
@@ -169,6 +210,9 @@ D_DoomMain:
     call    R_InitSprites               ; процедурные спрайты
     call    S_Init                      ; звук
     call    R_InitRender                ; таблицы рендера
+    mov     dword [numplayers], 1       ; по умолчанию игра одиночная
+    mov     dword [consoleplayer], 0
+    call    I_NetInit                   ; сеть, если задан ключ -net
     call    G_InitNew                   ; старт игры
 
     CALLW   imp_QueryPerformanceFrequency, g_qpf
@@ -241,6 +285,7 @@ D_DoomMain:
 
 .done:
     call    S_Shutdown
+    call    I_NetShutdown
     ENDFRAME
     ret
 
