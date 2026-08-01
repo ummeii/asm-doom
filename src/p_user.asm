@@ -358,7 +358,7 @@ P_DeathThink:
 P_PlayerThink:
     push    rbx
     push    rsi
-    call    G_BuildTiccmd
+    ; команда уже подставлена: своя из клавиш или пришедшая по сети
     mov     rbx, [playermo]
     test    rbx, rbx
     jz      .done

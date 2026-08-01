@@ -38,6 +38,7 @@ G_InitNew:
 
 G_LoadLevel:
     push    rbx
+    call    D_InitPlayers
     call    G_SetFastParms
     call    P_InitMobjs
     mov     dword [leveltime], 0
@@ -50,6 +51,11 @@ G_LoadLevel:
     call    P_InitSpecials
     call    P_SpawnThings
     call    G_PlayerReborn
+    ; окно уже держит своего игрока -- связываем с ним ячейку массива
+    mov     eax, [consoleplayer]
+    mov     [curplayer], eax
+    mov     rcx, [playermo]
+    mov     [playermos + rax*8], rcx
     pop     rbx
     ret
 
@@ -333,7 +339,11 @@ G_Ticker:
     cmp     qword [playermo], 0
     je      .done
 
-    call    P_PlayerThink
+    ; своя команда с клавиш -> общий буфер, затем тик всех игроков
+    call    G_BuildTiccmd
+    mov     ecx, [consoleplayer]
+    call    D_StoreCmd
+    call    D_RunPlayers
     call    P_RunThinkers
     call    P_UpdateSpecials
     inc     dword [leveltime]

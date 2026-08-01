@@ -300,6 +300,13 @@ dbg_addline:    resd 1
     alignb 16
 playermo:       resq 1
 player:         resb PLAYER_SIZE
+    alignb 16
+players:        resb MAXPLAYERS*PLAYER_SIZE
+playermos:      resq MAXPLAYERS
+netcmds:        resb MAXPLAYERS*TICCMD_SIZE
+numplayers:     resd 1
+consoleplayer:  resd 1
+curplayer:      resd 1
 pl_forwardmove: resd 1
 pl_sidemove:    resd 1
 pl_angleturn:   resd 1

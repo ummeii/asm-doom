@@ -49,6 +49,7 @@
 %include "src/m_menu.asm"
 %include "src/wi_stuff.asm"
 %include "src/f_wipe.asm"
+%include "src/d_net.asm"
 %include "src/g_game.asm"
 
 ; --------------------------------- данные ----------------------------------

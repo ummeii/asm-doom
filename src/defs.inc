@@ -266,6 +266,14 @@
 %define PL_PAD          292
 %define PLAYER_SIZE     320
 
+; --------------------------- несколько игроков -----------------------------
+%define MAXPLAYERS      2
+%define TC_FORWARD      0
+%define TC_SIDE         4
+%define TC_TURN         8
+%define TC_BUTTONS      12
+%define TICCMD_SIZE     16
+
 ; pspdef: state(dq), tics(dd), sx(dd), sy(dd), pad(dd) = 24
 %define PSP_STATE   0
 %define PSP_TICS    8
